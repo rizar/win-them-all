@@ -1,0 +1,36 @@
+application: win-them-all
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+
+- url: /design
+  static_dir: design    
+
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /javascript
+  static_dir: javascript
+
+- url: /edit_contest*
+  script: edit_contest.py
+
+- url: /delete_contest*
+  script: edit_contest.py
+
+- url: /error*
+  script: stuff.py
+
+- url: /about*
+  script: stuff.py
+
+- url: /guestbook*
+  script: guestbook.py
+
+- url: /
+  script: show_contests.py
+
+- url: /contest_details
+  script: show_contests.py

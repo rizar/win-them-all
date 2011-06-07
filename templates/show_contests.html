@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <script type = "text/javascript" src = "/javascript/setlocaldates.js"> </script>
+    <script type = "text/javascript" src = "/javascript/updatedate.js"> </script>
+    <script type = "text/javascript" src = "/javascript/init.js"> </script>
+    <script>
+        function onControlsSubmit()
+        {
+            var errors = document.getElementById("errors")
+
+            beforeDate = getDateFromControls("before_year", "before_month", "before_day", "before_time")
+            afterDate = getDateFromControls("after_year", "after_month", "after_day", "after_time")
+            if (!beforeDate || !afterDate)
+            {
+                errors.innerHTML = "Enter correct time in format &quot;HH:MM&quot;"
+                return false
+            }
+                           
+            location.replace("/?after_utc=" + afterDate.getTime() + "&before_utc=" + beforeDate.getTime())       
+            return false
+        }
+    </script>
+
+    <div id = "contests">
+        <p id = "time_hint"> In your local time: </p>
+        <table id = "contests_table">
+            {% for box in boxes %}
+            <tr>
+                <th class = "local_hm">{{ box.timestamp }}</th>
+                <td class = "cont_in_table"><a href = "/contest_details?id={{box.contest.key.id}}"> {{ box.contest.short_name }}</a></td> 
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id = "controls">
+        <form name = "controls" action = "" onsubmit = "return onControlsSubmit()">
+        <h3>                  
+            Show only contests after
+        </h3>
+        <table>
+            <tr>
+                <th> Year </th>
+                <th> Month </th>
+                <th> Day </th>
+            </tr>
+            <tr>
+                <td> 
+                    <select name = "after_year" onchange = "onMonthChanged(&quot;after_year&quot;, &quot;after_month&quot;, &quot;after_day&quot;)"> </select>
+                </td>
+                <td>
+                    <select name = "after_month" onchange = "onMonthChanged(&quot;after_year&quot;, &quot;after_month&quot;, &quot;after_day&quot;)"> </select>
+                </td>
+                <td>
+                    <select name = "after_day"> </select>
+                </td>
+            </tr>   
+            <tr>
+                <th> Time </th>
+            </tr>
+            <tr>
+                <td> <input name = "after_time" size = "6" maxlength = "5" value = "{{ contest_time }}"> </input> </td>
+            </tr>
+        </table>
+        <h3>                  
+            Show only contests before
+        </h3>
+        <table>
+            <tr>
+                <th> Year </th>
+                <th> Month </th>
+                <th> Day </th>
+            </tr>
+            <tr>
+                <td> 
+                    <select name = "before_year" onchange = "onMonthChanged(&quot;before_year&quot;, &quot;before_month&quot;, &quot;before_day&quot;)"> 
+                    </select>
+                </td>
+                <td>
+                    <select name = "before_month" onchange = "onMonthChanged(&quot;before_year&quot;, &quot;before_month&quot;, &quot;before_day&quot;)")>
+                    </select>
+                </td>
+                <td>
+                    <select name = "before_day">
+                    </select>
+                </td>
+            </tr>   
+            <tr>
+                <th> Time </th>
+            </tr>
+            <tr>
+                <td> <input name = "before_time" size = "6" maxlength = "5" value = "{{ contest_time }}"> </input> </td>
+            </tr>
+        </table>
+        <input id = "show_button" type = "submit" value = "Show">
+
+        <input type = "hidden" id = "after_utc" value = "{{after_utc}}">
+        <input type = "hidden" id = "before_utc" value = "{{before_utc}}">
+        </form>
+        <p id = "errors"></p>
+    </div>
+
+    <script type = "text/javascript">
+        insertDateNames("contests_table")
+        setLocalDates()
+
+        var afterUTC = document.getElementById("after_utc").value
+        var afterDate
+        if (!afterUTC)
+            afterDate = new Date()
+        else
+            afterDate = new Date(parseInt(afterUTC))
+
+        var beforeUTC = document.getElementById("before_utc").value
+        var beforeDate
+        if (!beforeUTC)
+        {
+            beforeDate = new Date()
+            beforeDate = new Date(beforeDate.getTime() + 86400 * 7 * 1000)
+        }
+        else
+            beforeDate = new Date(parseInt(beforeUTC))
+
+        initializeTimeAndDate("after_year", "after_month", "after_day", "after_time",
+                               afterDate.getFullYear(), afterDate.getMonth(), afterDate.getDate(), formatTime(afterDate))
+        initializeTimeAndDate("before_year", "before_month", "before_day", "before_time",
+                               beforeDate.getFullYear(), beforeDate.getMonth(), beforeDate.getDate(), formatTime(beforeDate))                                   
+    </script>
+{% endblock contents %}

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>WinThemAll - programming competitions calendar.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel ="stylesheet" href="/stylesheets/stylesheet.css"  type="text/css">
+    <script type = "text/javascript" src = "javascript/updatedate.js"> </script>
+    <script type = "text/javascript" src = "/javascript/getelementsbyclassname.js"> </script>
+  </head>
+  <body>
+      <div id = "sheet">
+
+      <map name = "menu_map" id = "menu_map">
+      <area href = "/" shape = "rect" coords = "29, 2, 106, 21">
+      <area href = "/edit_contest" shape = "rect" coords = "138, 2, 242, 21">
+      <area href = "/guestbook" shape = "rect" coords = "275, 2, 367, 21">
+      <area href = "/about" shape = "rect" coords = "403, 2, 455, 21">
+      </map>    
+      <div id = "head">
+      <img id = "headerpic" src = "/design/headerpic.gif"> <br>
+      <img id = "menu" src = "/design/menu.gif" usemap = "#menu_map"> 
+      </div>
+
+      {% block contents %}
+      {% endblock contents %}
+
+      <div id = "footer" class = "footer"><img src = "/design/footer.gif" </div>
+
+      </div>
+  </body>
+</html>
+

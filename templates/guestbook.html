@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <script type = "text/javascript" src = "javascript/onsubmit.js"> </script>
+
+    <form onsubmit = "return onPostNumberSubmit()" id = "show_posts" action = "/guestbook" method = "get">
+        <table id = "show_posts_table">
+        <tr> <th> Enter number of last posts to show (10 default, no more than 1000): </th> </tr>
+        <tr> <td> <input name = "posts_to_show" value = {{n_posts_to_show}}> </td> </tr>
+        <tr> <td> <input type = "submit" value = "Show"> </td> </tr>
+        </table>        
+    </form>
+
+    <div id = "messages">
+    {% for box in boxes %}
+        <h3> {{box.date}} {{box.message.who}} wrote: </h3>
+        <p> {{box.message.content}} </p>
+    {% endfor %}
+    </div>
+
+    <form onsubmit = "return onMessageSubmit()" id = "new_message" action = "/guestbook" method = "post">
+        <table id = "new_message_table">
+        <tr> <th class = "post_hint"> Who are you? </th> </tr>
+        <tr> <td> <input maxlength = "20" size = "20" name = "who"> </td> </tr>
+        <tr> <th class = "post_hint"> Enter you message here: </th> </tr>
+        <tr> <td> <textarea name = "content" rows = "10" cols = "50"></textarea> </td> <td> ...no more than 1000 symbols </td></tr>
+        <tr> <td> <input type = "submit" value = "Post"> </td> </tr>
+        </table>
+    </form>
+{% endblock contents %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <script type = "text/javascript" src = "/javascript/setlocaldates.js"> </script>
+    <table class = "ct">
+       <tr>
+           <th class = "cf"> Full name </th>
+           <td class = "cf"> {{ box.contest.full_name }} </td>
+       </tr>
+       <tr>
+           <th class = "cf"> Short name </th>
+           <td class = "cf"> {{ box.contest.short_name }} </td>
+       </tr>
+       <tr>
+           <th class = "cf"> Home page </th>
+           <td class = "cf"> <a href = "{{ box.contest.home_page }}"> {{ box.contest.home_page }} </a> </td>
+       </tr>
+       <tr>
+           <th class = "cf"> Contest type </th>
+           <td class = "cf"> {{ box.contest.contest_type }} </td>
+       </tr> 
+       <tr>
+           <th class = "cf"> Contest home time </th>
+           <td class = "cf"> {{ box.original_time }} </td>
+       </tr>
+       <tr>
+           <th class = "cf"> Your local time </th>
+           <td class = "cf"> <span class = "local_time"> {{ box.timestamp }} </span> </td>
+       </tr>
+       <tr>
+           <th class = "cf"> Information </th>
+           <td class = "cf"> {{ box.contest.info }} </td>
+       </tr>
+    </table>
+    <ul class = "buttons_list">
+        <li> <a href = "/edit_contest?id={{ box.contest.key.id }}"><img class = "image_link" src = "/design/button_edit.gif"></a> </li>
+        <li> <a href = "/delete_contest?id={{ box.contest.key.id }}"><img class = "image_link" src = "/design/button_delete.gif"></a> </li>
+    </ul>        
+    <script type = "text/javascript">
+        setLocalDates()
+    </script>        
+{% endblock contents %}

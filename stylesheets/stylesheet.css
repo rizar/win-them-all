@@ -1,0 +1,140 @@
+body {
+    background: grey
+}
+
+table.ct {
+    width: 90%;  
+    /*border: solid 1px silver;*/
+    border-collapse: collapse;
+    margin: 20px;
+    table-layout: fixed;
+    word-wrap: break-word;
+    overflow: hidden
+}
+
+#head {
+    text-align: center;     
+}
+
+#menu {
+    border: 0px;
+}
+
+#contests {
+    width: 60%;
+    float: left;
+    padding-top: 15px;
+}
+
+#controls {
+    float: right;
+    padding-top: 15px;
+}
+
+div.footer {
+    clear: both;
+    text-align: center;
+    padding-top: 15px
+}
+
+#sheet {
+    width: 800px;
+    margin: auto;
+    background: #e6d793
+}
+
+#edit_contest {
+    padding-top: 15px;
+}
+
+#about {
+    margin: 30px;
+}
+
+#ready {
+    text-align: center;
+    padding: 15px;
+}
+
+td.hint {
+    padding-left: 13px;
+}
+
+th.row_name {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#headerpic {
+    padding-top: 10px;
+}
+
+#footer {
+    padding-bottom: 5px;
+}
+
+img.image_link {
+    border: 0px;
+}
+
+li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+#errors {
+    padding: 10px;
+}
+
+ul.buttons_list {
+    padding-left: 300px;
+}
+
+th.day_in_table {
+    padding: 10px;
+}
+
+td.cont_in_table {
+    padding-left: 20px;
+}
+
+th.local_hm {
+    padding-left: 20px;
+}
+
+#controls {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: solid 2px  
+}
+
+#show_button {
+    margin-top: 20px;
+}
+
+th.post_hint {
+    text-align: left;
+}
+
+#show_posts_table {
+    float: right;
+    margin: 20px;
+    width: 30%;
+}
+
+#new_message_table {
+    margin: 20px;
+}
+
+#messages {
+    margin: 20px;
+    word-wrap: break-word;
+    width: 60%
+}
+
+#time_hint {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+}

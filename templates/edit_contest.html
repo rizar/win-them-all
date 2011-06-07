@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <script type = "text/javascript" src = "/javascript/onsubmit.js"> </script>
+    <form action = "/edit_contest" method = "post" onsubmit = "return onSubmit()">
+        <table id = "edit_contest">
+            <tr>
+                <th class = "row_name"> Full competition <br> name </th>
+                <td colspan = "10"> <textarea name = "full_name" rows = "4" cols = "50">{{ contest.full_name }}</textarea> </td>
+                <td class = "hint"> ...no more than 200 symbols </td>
+            </tr>
+            <tr>
+                <th class = "row_name"> Short competition <br> name </th>
+                <td colspan = "10"> <input name = "short_name" size = "30" maxlength = "30" value = "{{ contest.short_name }}"> </td>
+                <td class = "hint"> ...no more than 30 symbols </td>
+            </tr>
+            <tr> 
+                <th class = "row_name"> Home page </th>
+                <td colspan = "10"> <input name = "home_page" size = "50" maxlength = "500" value = "{{ contest.home_page }}"> </td>                
+                <td class = "hint"> ...must start with &quot;http://&quot;
+            </tr>
+            <tr>
+                <th class = "row_name"> Contest type </th>
+                <td> 
+                    <select name = "contest_type"> 
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class = "row_name"> Year </th>
+                <td> 
+                    <select name = "year"> 
+                    </select>
+                </td>
+                <th> Month </th>
+                <td>
+                    <select name = "month" onchange = "onMonthChanged(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;)">
+                    </select>
+                </td>
+                <th> Day </th>
+                <td>
+                    <select name = "day">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class = "row_name"> Time </th>
+                <td> <input name = "time" size = "6" maxlength = "5" value = "00:00"> </td>
+                <th> Time zone </th>
+                <td colspan = "10"> 
+                    <select name = "time_zone">
+                    {% for time_zone in time_zones %}
+                        <option>{{ time_zone }}</option>
+                    {% endfor %}    
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class = "row_name"> Information <br> about the contest </th>
+                <td colspan = "10"> <textarea name = "info" rows = "4" cols = "50">{{ contest.info }}</textarea> </td>                
+                <td class = "hint"> ...no more than 1000 symbols </td>
+            </tr>
+            <tr>
+                <td id = "ready"> <input type = "image" src = "/design/button_ready.gif" value = "Ready"> </td>
+            </tr>
+        </table>
+
+        <input name = "id" type = "hidden" value = "{{ id }}">
+        <input id = "default_contest_type" type = "hidden" value = "{{ default_contest_type }}"> 
+        <input id = "default_year" type = "hidden" value = "{{ default_year }}"> 
+        <input id = "default_month" type = "hidden" value = "{{ default_month }}">
+        <input id = "default_day" type = "hidden" value = "{{ default_day }}">
+        <input id = "default_time" type = "hidden" value = "{{ default_time }}">
+        <input id = "default_time_zone" type = "hidden" value = "{{ default_time_zone }}">
+
+    </form>
+    <p id = "errors">
+    </p>
+
+    <script type = "text/javascript" src = "/javascript/init.js">
+    </script>
+    <script>
+         date = new Date()
+
+         var defaultYear = document.getElementById("default_year").value
+         if (!defaultYear)
+            defaultYear = date.getUTCFullYear()
+  
+         var defaultMonth = document.getElementById("default_month").value
+         if (!defaultMonth)
+            defaultMonth = date.getUTCMonth()
+
+         var defaultDay = document.getElementById("default_day").value
+         if (!defaultDay)
+            defaultDay = date.getUTCDate()
+
+         var defaultTime = document.getElementById("default_time").value
+         if (!defaultTime)
+            defaultTime = "00:00"
+
+         var defaultContestType = document.getElementById("default_contest_type").value
+         if (!defaultContestType)
+            defaultContestType = "Training"
+
+         var defaultTimeZone = document.getElementById("default_time_zone").value
+         if (!defaultTimeZone)
+            defaultTimeZone = "UTC"
+
+         initializeTimeAndDate("year", "month", "day", "time", 
+                                defaultYear, defaultMonth, defaultDay, defaultTime)
+         initializeContest("contest_type", defaultContestType)
+         selectTimeZone("time_zone", defaultTimeZone)
+    </script>
+{% endblock contents %}
